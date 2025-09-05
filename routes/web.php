@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\SdgController;
+use App\Http\Controllers\Admin\SdgGoalController;
+use App\Http\Controllers\Admin\SdgIndicatorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,23 +17,28 @@ use App\Http\Controllers\Admin\UserController;
 |
 */
 
-
-
 Auth::routes(['register' => false]);
 
-Route::middleware(['auth', 'is_admin'])->group(function () {
-    Route::get('/admin/users', [UserController::class, 'index']); // или любой другой admin-доступ
-});
-
-
-Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
-    Route::get('/users/create', [UserController::class, 'create'])->name('admin.users.create');
-    Route::post('/users', [UserController::class, 'store'])->name('admin.users.store');
-    Route::prefix('admin')->name('admin.')->middleware(['auth', 'is_admin'])->group(function () {
-        Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
-    });
-    Route::put('/users/{user}/reset-password', [UserController::class, 'resetPassword'])
-        ->name('admin.users.reset-password');
-});
-
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Группа маршрутов для админки — требует авторизации и проверки is_admin
+Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(function () {
+    // CRUD пользователи
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+    Route::post('/users', [UserController::class, 'store'])->name('users.store');
+    Route::put('/users/{user}/reset-password', [UserController::class, 'resetPassword'])->name('users.reset-password');
+
+    // Можно оставить resource, если хочешь весь CRUD через ресурсный контроллер
+    Route::resource('users', UserController::class)->except(['index', 'create', 'store']);
+});
+Route::redirect('/home', '/', 301);
+
+Route::get('/admin', function () {
+    return redirect()->route('admin.goals.index');
+});
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('goals', SdgGoalController::class);
+    Route::resource('indicators', SdgIndicatorController::class);
+});
