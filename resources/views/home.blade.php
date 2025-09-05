@@ -35,7 +35,7 @@
                         </a>
                     @endif
 
-                    <a href="{{ route('admin.users.index') }}" class="download-btn"
+                    <a href="{{ route('admin.goals.index') }}" class="download-btn"
                        style="margin-right: 10px; padding: 5px 10px; border-radius: 8px">
                         Админ панель
                     </a>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
     <div class="container">
@@ -16,6 +16,7 @@
                 <th>Код</th>
                 <th>Название</th>
                 <th>Цвет</th>
+                <th>Ссылка</th>
                 <th>Действия</th>
             </tr>
             </thead>
@@ -27,6 +28,11 @@
                     <td>{{ $goal->title }}</td>
                     <td>
                         <div style="width:30px; height:20px; background: {{ $goal->color ?? '#ccc' }}"></div>
+                    </td>
+                    <td>
+                        @if($goal->url)
+                            <a href="{{ $goal->url }}" target="_blank">Перейти</a>
+                        @endif
                     </td>
                     <td>
                         <a href="{{ route('admin.goals.edit', $goal) }}" class="btn btn-sm btn-warning">Редактировать</a>
