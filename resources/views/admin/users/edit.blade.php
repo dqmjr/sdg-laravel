@@ -75,6 +75,7 @@
 
         </form>
 
-        <button class="mt-3 btn btn-secondary"><a class="text-white text-decoration-none    " href="{{ route('admin.users.index') }}">Выйти</a></button>
+        <button class="mt-3 btn btn-secondary"><a class="text-white text-decoration-none    "
+                                                  href="{{ route('admin.users.index') }}">Отмена</a></button>
     </div>
 @endsection

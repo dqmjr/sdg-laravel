@@ -23,7 +23,8 @@
                 <input type="text" name="color" value="{{ $goal->color }}" class="form-control">
             </div>
 
-            <button class="btn btn-success">Обновить</button>
+            <button class="btn btn-primary">Сохранить</button>
+            <a href="{{route('admin.goals.index')}}" class="btn btn-secondary">Отмена</a>
         </form>
     </div>
 @endsection

@@ -44,7 +44,10 @@
                 <input type="url" name="url" value="{{ $indicator->url }}" class="form-control">
             </div>
 
-            <button class="btn btn-success">Обновить</button>
+            <button class="btn btn-primary">Сохранить</button>
+
+            <a href="{{route('admin.indicators.index')}}" class="btn btn-secondary">Отмена</a>
+
         </form>
     </div>
 @endsection

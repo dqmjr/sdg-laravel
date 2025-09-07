@@ -27,24 +27,19 @@
 
                     @endif
                 @else
-
-                    @if(auth()->user()->role === 'admin')
-                        <a href="{{ route('admin.users.index') }}" class="download-btn"
-                           style="margin-right: 10px; padding: 5px 10px; border-radius: 8px">
-                            Пользователи
-                        </a>
-                    @endif
-
                     <a href="{{ route('admin.goals.index') }}" class="download-btn"
-                       style="margin-right: 10px; padding: 5px 10px; border-radius: 8px">
+                       style="margin-right: 10px; padding: 8px 10px; border-radius: 8px; font-size: 16px;line-height: 150%; display: flex;align-items: center">
                         Админ панель
                     </a>
 
-                    <a class="header__logout-btn" data-lang="kk"
+                    <a class="download-btn" data-lang="kk"
                        href="{{ route('logout') }}"
+                       style="margin-right: 10px; padding: 8px 10px; border-radius: 8px; font-size: 16px;line-height: 150%; display: flex;align-items: center"
                        onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                        <span class="language-name">{{ __('Выйти') }}</span>
+                        if (confirm('Вы действительно хотите выйти?')) {
+                            document.getElementById('logout-form').submit();
+                        }">
+                        {{ __('Выйти') }}
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf

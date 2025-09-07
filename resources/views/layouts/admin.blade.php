@@ -7,14 +7,16 @@
     <style>
         body {
             display: flex;
+            min-height: 100vh;
+            margin: 0;
         }
 
         .sidebar {
-            width: 220px;
-            height: 100vh;
+            width: 280px;
             background: #343a40;
             color: white;
             padding: 20px 10px;
+            flex-shrink: 0; /* не даём сжиматься */
         }
 
         .sidebar a {
@@ -32,15 +34,20 @@
         .content {
             flex: 1;
             padding: 20px;
+            background: #f8f9fa;
         }
     </style>
 </head>
 <body>
 
 <div class="sidebar">
-    <h4>Админка</h4>
-    <a href="{{ route('admin.goals.index') }}">🎯 Цели</a>
-    <a href="{{ route('admin.indicators.index') }}">📊 Индикаторы</a>
+    <a class="navbar-brand mb-4" href="{{ url('/') }}">
+        <div class="header__logo">
+            <img src="{{ asset('/img/logo.svg') }}" alt="logo"/>
+        </div>
+    </a>
+    <a href="{{ route('admin.goals.index') }}">Цели</a>
+    <a href="{{ route('admin.indicators.index') }}">Индикаторы</a>
     @guest
         @if (Route::has('login'))
 
@@ -54,8 +61,11 @@
         @endif
 
         <a data-lang="kk" href="{{ route('logout') }}"
-           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-            <span class="language-name">{{ __('Выйти') }}</span>
+           onclick="event.preventDefault();
+                        if (confirm('Вы действительно хотите выйти?')) {
+                            document.getElementById('logout-form').submit();
+                        }">
+            {{ __('Выйти') }}
         </a>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
             @csrf
