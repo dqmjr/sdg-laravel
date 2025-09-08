@@ -20,7 +20,7 @@
 
             <div class="mb-3">
                 <label class="form-label">Цвет</label>
-                <input type="text" name="color" value="{{ $goal->color }}" class="form-control">
+                <input type="color" name="color" value="{{ $goal->color }}" class="form-control">
             </div>
 
             <button class="btn btn-primary">Сохранить</button>

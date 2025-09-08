@@ -17,6 +17,7 @@
                 <th>Название</th>
                 <th>Статус</th>
                 <th>Значение</th>
+                <th>Ед.измерение</th>
                 <th class="text-end">Действия</th>
             </tr>
             </thead>
@@ -28,6 +29,7 @@
                     <td>{{ $indicator->title }}</td>
                     <td>{{ $indicator->status }}</td>
                     <td>{{ $indicator->value }}</td>
+                    <td>{{ $indicator->unit }}</td>
 
                     <td class="text-end">
                         <a href="{{ route('admin.indicators.edit', $indicator) }}" >

@@ -330,6 +330,7 @@
                     'title'  => $indicator->title,
                     'status' => $indicator->status,
                     'value'  => $indicator->value,
+                    'unit'   => $indicator->unit,
                     'url'    => $indicator->url,
                 ];
             })->toArray(),

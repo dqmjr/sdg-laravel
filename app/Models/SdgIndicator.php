@@ -14,6 +14,7 @@ class SdgIndicator extends Model
         'title',
         'status',
         'value',
+        'unit',
         'url',
     ];
 

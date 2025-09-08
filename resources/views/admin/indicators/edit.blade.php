@@ -40,6 +40,11 @@
             </div>
 
             <div class="mb-3">
+                <label class="form-label">Единица измерение</label>
+                <input type="text" name="unit" value="{{ $indicator->unit }}" class="form-control">
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label">Ссылка</label>
                 <input type="url" name="url" value="{{ $indicator->url }}" class="form-control">
             </div>

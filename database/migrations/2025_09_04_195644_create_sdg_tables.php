@@ -24,6 +24,7 @@ return new class extends Migration {
             $table->string('title');
             $table->enum('status', ['good', 'bad', 'neutral'])->nullable();
             $table->double('value', 15, 2)->nullable();
+            $table->string('unit')->nullable();
             $table->string('url')->nullable();
             $table->timestamps();
         });

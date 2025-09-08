@@ -37,6 +37,11 @@
             </div>
 
             <div class="mb-3">
+                <label class="form-label">Единица измерение</label>
+                <input type="text" step="0.01" name="unit" class="form-control">
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label">Ссылка</label>
                 <input type="url" name="url" class="form-control">
             </div>

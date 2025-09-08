@@ -2,32 +2,16 @@ const colors = ["#EF384C", "#E9B233", "#10A348", "#E42338", "#F1523D", "#26BDE2"
 
 function calculatePercentages(data) {
     return data.map((item) => {
-        console.log(item.data.length)
         const total = item.data.reduce((sum, el) => sum + el.value, 0);
 
         let percents = 100 / item.data.length;
-
-        // if (sumPercents > 100) {
-        //   let diff = sumPercents - 100;
-        //   while (diff > 0) {
-        //     const minIndex = percents.indexOf(Math.min(...percents));
-        //     percents[minIndex] -= 1;
-        //     diff--;
-        //   }
-        // } else if (sumPercents < 100) {
-        //   let diff = 100 - sumPercents;
-        //   while (diff > 0) {
-        //     const maxIndex = percents.indexOf(Math.max(...percents));
-        //     percents[maxIndex] += 1;
-        //     diff--;
-        //   }
-        // }
 
         return {
             ...item,
             data: item.data.map((el, idx) => ({
                 ...el,
                 percent: percents,
+                unit: el.unit ?? "" // значение по умолчанию
             })),
         };
     });
@@ -57,6 +41,7 @@ result.forEach((item, index) => {
                 data-title="${d.title}"
                 data-status="${d.status}"
                 data-value="${d.value}"
+                data-unit="${d.unit}"
                 data-url="${d.url}"
               >
               </div>
@@ -74,11 +59,12 @@ container.addEventListener("mousemove", (e) => {
         const title = e.target.dataset.title;
         const status = e.target.dataset.status;
         const value = e.target.dataset.value;
+        const unit = e.target.dataset.unit;
         tooltip.innerHTML = `
       <div class="tooltip-title">${title}</div>
       <div class="tooltip-row">
         <div class="tooltip-cube ${status}" ></div>
-        <div> <span class="tooltip-value">${value}</span></div>
+        <div> <span class="tooltip-value">${value}</span> ${unit} </div>
       </div>
     `;
 

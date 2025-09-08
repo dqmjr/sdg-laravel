@@ -28,6 +28,7 @@ class SdgIndicatorController extends Controller
             'title'   => 'required',
             'status'  => 'nullable|in:good,bad,neutral',
             'value'   => 'nullable|numeric',
+            'unit'    => 'nullable|string|max:255',
             'url'     => 'nullable|url',
         ]);
 
@@ -49,6 +50,7 @@ class SdgIndicatorController extends Controller
             'title'   => 'required',
             'status'  => 'nullable|in:good,bad,neutral',
             'value'   => 'nullable|numeric',
+            'unit'    => 'nullable|string|max:255',
             'url'     => 'nullable|url',
         ]);
 

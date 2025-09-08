@@ -22,11 +22,6 @@
                 <input type="color" name="color" class="form-control">
             </div>
 
-            <div class="mb-3">
-                <label class="form-label">Ссылка</label>
-                <input type="url" name="url" class="form-control">
-            </div>
-
             <button class="btn btn-success">Сохранить</button>
         </form>
     </div>
