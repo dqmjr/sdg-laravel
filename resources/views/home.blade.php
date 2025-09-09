@@ -34,7 +34,6 @@
 
                     <a class="download-btn" data-lang="kk"
                        href="{{ route('logout') }}"
-                       style="margin-right: 10px; padding: 8px 10px; border-radius: 8px; font-size: 16px;line-height: 150%; display: flex;align-items: center"
                        onclick="event.preventDefault();
                         if (confirm('Вы действительно хотите выйти?')) {
                             document.getElementById('logout-form').submit();
@@ -97,9 +96,7 @@
 
                 <div class="card-block">
                     @foreach($goals as $goal)
-                        <a href="{{ $goal->url ?? '#' }}"
-                           class="card-item"
-                           style="background: {{ $goal->color }};">
+                        <a href="#" class="card-item" style="background: {{ $goal->color }};">
 
                             <div class="card-item--number">
                                 {{ $goal->code }}
@@ -322,10 +319,12 @@
 </footer>
 
 @php
-    $chartData = \App\Models\SdgGoal::with('indicators')->get()->map(function($goal) {
+    $chartData = $goals->map(function($goal) {
         return [
+            'code'  => $goal->code,
             'title' => $goal->title,
-            'data' => $goal->indicators->map(function($indicator) {
+            'color' => $goal->color,
+            'data'  => $goal->indicators->map(function($indicator) {
                 return [
                     'title'  => $indicator->title,
                     'status' => $indicator->status,
@@ -337,18 +336,18 @@
         ];
     })->toArray();
 @endphp
+
 <script>
     const chartData = @json($chartData);
-    console.log(chartData);
+    window.chartData = chartData;
 </script>
 
 <script src="{{ asset('/js/chart.js') }}"></script>
-<!-- Scripts -->
 <script src="{{ asset('/js/jquery-3.0.0.min.js') }}"></script>
 <script src="{{ asset('/js/slick.min.js') }}"></script>
 <script src="{{ asset('/js/jquery.waypoints.min.js') }}"></script>
 <script src="{{ asset('/js/jquery.inputmask.bundle.js') }}"></script>
-<script src="{{ asset('/js/script.js') }}"></script>
+<script src='{{ asset('/js/script.js') }}'></script>
 </body>
 </html>
 

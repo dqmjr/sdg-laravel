@@ -1,72 +1,68 @@
-const colors = ["#EF384C", "#E9B233", "#10A348", "#E42338", "#F1523D", "#26BDE2", "#FFAA00", "#B81E4C", "#F27439", "#F02D79", "#FB9C32", "#CB942F", "#0F804C", "#1096D3", "#2EB24D", "#066F9F", "#074B6E"];
-
 function calculatePercentages(data) {
     return data.map((item) => {
         const total = item.data.reduce((sum, el) => sum + el.value, 0);
 
-        let percents = 100 / item.data.length;
+        let percents = item.data.length > 0 ? 100 / item.data.length : 0;
 
         return {
             ...item,
-            data: item.data.map((el, idx) => ({
+            data: item.data.map((el) => ({
                 ...el,
                 percent: percents,
-                unit: el.unit ?? "" // значение по умолчанию
+                unit: el.unit ?? ""
             })),
         };
     });
 }
 
+// Tooltip
 const tooltip = document.createElement("div");
 tooltip.className = "tooltip";
 document.body.appendChild(tooltip);
 
-const result = calculatePercentages(chartData);
+// Данные из Blade
+const result = calculatePercentages(window.chartData);
 const container = document.getElementById("chart-block");
 
-result.forEach((item, index) => {
+// Рендер
+result.forEach((item) => {
     const block = document.createElement("div");
-    const number = String(index + 1).padStart(2, "0");
+    const number = item.code; // Берём из БД (например "01")
     block.className = "chart-line-row";
 
     block.innerHTML = `
-          <div class="chart-line-title"><span style="color:${colors[index]}">${number} </span>${item.title}</div>
-          <div class="chart-line">
-            ${item.data
-        .map(
-            (d) => `
-              <div
-                class="chart-line-item ${d.status}"
-                style="width:${d.percent}%"
-                data-title="${d.title}"
-                data-status="${d.status}"
-                data-value="${d.value}"
-                data-unit="${d.unit}"
-                data-url="${d.url}"
-              >
-              </div>
-            `
-        )
-        .join("")}
-          </div>
-        `;
+        <div class="chart-line-title">
+            <span style="color:${item.color}">${number} </span>${item.title}
+        </div>
+        <div class="chart-line">
+            ${item.data.map((d) => `
+                <div
+                    class="chart-line-item ${d.status}"
+                    style="width:${d.percent}%"
+                    data-title="${d.title}"
+                    data-status="${d.status}"
+                    data-value="${d.value}"
+                    data-unit="${d.unit}"
+                    data-url="${d.url}"
+                ></div>
+            `).join("")}
+        </div>
+    `;
 
     container.appendChild(block);
 });
 
+// Tooltip поведение
 container.addEventListener("mousemove", (e) => {
     if (e.target.classList.contains("chart-line-item")) {
-        const title = e.target.dataset.title;
-        const status = e.target.dataset.status;
-        const value = e.target.dataset.value;
-        const unit = e.target.dataset.unit;
+        const { title, status, value, unit } = e.target.dataset;
         tooltip.innerHTML = `
-      <div class="tooltip-title">${title}</div>
-      <div class="tooltip-row">
-        <div class="tooltip-cube ${status}" ></div>
-        <div> <span class="tooltip-value">${value}</span> ${unit} </div>
-      </div>
-    `;
+            <div class="tooltip-title">${title}</div>
+            <div class="tooltip-row">
+                <div class="tooltip-cube ${status}"></div>
+                <div><span class="tooltip-value">${value}</span> ${unit}</div>
+            </div>
+        `;
 
         tooltip.style.left = e.pageX + 10 + "px";
         tooltip.style.top = e.pageY + 10 + "px";
@@ -75,11 +71,11 @@ container.addEventListener("mousemove", (e) => {
         tooltip.style.opacity = 0;
     }
 });
+
+// Клик по блоку → открыть ссылку
 document.addEventListener("click", (e) => {
     const item = e.target.closest(".chart-line-item");
     if (item && item.dataset.url) {
-        const url = item.dataset.url;
-        console.log(item);
-        window.open(url, "_blank");
+        window.open(item.dataset.url, "_blank");
     }
 });

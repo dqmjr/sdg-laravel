@@ -12,6 +12,7 @@ class SdgGoal extends Model
     protected $fillable = [
         'code',
         'title',
+        'color',
     ];
 
     /**
