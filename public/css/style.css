@@ -6,7 +6,7 @@
 }
 
 :root {
-    --font-family: "Roboto", sans-serif;
+    --font-family: "Open Sans", Helvetica, Arial, sans-serif;
     --second-family: "Inter", sans-serif;
     --third-family: "Nunito Sans", sans-serif;
 }
@@ -122,6 +122,29 @@ body {
     margin-top: 15px;
 }
 
+.links-section{
+    border-bottom: 1px solid #00000026;
+}
+.links-content {
+    margin: 23px 0 26px 0;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    gap: 26px;
+}
+.links-content a {
+    display: flex;
+    color: #023388;
+    text-decoration: none;
+    align-items: center;
+    border-left: 2px solid #027DBC;
+    padding-left: 13px;
+    max-width: max-content;
+}
+
 .chart-section {
     padding: 50px 0;
 }
@@ -222,14 +245,17 @@ body {
 }
 
 .text-block {
-    font-weight: 300;
-    font-size: 14px;
+    font-weight: 400;
+    font-size: 16px;
     line-height: 140%;
-    text-align: center;
+    text-align: justify;
     color: #000;
-    text-align: center;
     margin-bottom: 50px;
 
+}
+
+.text-block p {
+    margin-bottom: 0.5rem;
 }
 
 .download-section {
@@ -262,7 +288,7 @@ body {
 
 .file-info {
     font-weight: 300;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 140%;
     text-align: center;
     color: #000;

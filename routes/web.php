@@ -34,11 +34,12 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(
 });
 Route::redirect('/home', '/', 301);
 
-Route::get('/admin', function () {
-    return redirect()->route('admin.goals.index');
-});
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 
-Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('admin.goals.index');
+    });
+
     Route::resource('goals', SdgGoalController::class);
     Route::resource('indicators', SdgIndicatorController::class);
 });

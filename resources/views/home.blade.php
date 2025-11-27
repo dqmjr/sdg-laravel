@@ -8,8 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&family=Nunito+Sans:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&&display=swap"
         rel="stylesheet"/>
+
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}"/>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -115,7 +116,38 @@
             </div>
         </div>
     </section>
-
+    <section class="links-section">
+        <div class="container">
+            <div class="links-content">
+                <a href="https://economy.kz/ru/Celi_ustojchivogo_razvitija/About_TSUR/">
+                    <div class="links-content__link">
+                        О реализации Целей устойчивого<br> развития в Казахстане
+                    </div>
+                </a>
+                <a href="https://sustainabledevelopment.un.org/">
+                    <div class="links-content__link">
+                        Платформа знаний<br> ЦУР ООН
+                    </div>
+                </a>
+                <a href="https://unstats.un.org/home/">
+                    <div class="links-content__link">
+                        Статистический<br> отдел ООН
+                    </div>
+                </a>
+                <a href="https://www.unece.org/unece-and-the-sdgs/unece-and-the-sdgs.html">
+                    <div class="links-content__link" style="white-space: nowrap">
+                        ЕЭК ООН и ЦУР
+                    </div>
+                </a>
+                <a href="https://datatopics.worldbank.org/sdgs/index.html">
+                    <div class="links-content__link">
+                        Показатели Всемирного Развития <br>Цели Устойчивого Развития
+                    </div>
+                </a>
+            </div>
+            <a href=""></a>
+        </div>
+    </section>
     <section class="chart-section">
         <div class="container">
             <div class="chart-content">
