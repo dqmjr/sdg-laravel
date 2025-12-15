@@ -12,9 +12,13 @@ class SdgIndicator extends Model
     protected $fillable = [
         'goal_id',
         'title',
+        'title_kk',
+        'title_en',
         'status',
         'value',
         'unit',
+        'unit_kk',
+        'unit_en',
         'url',
     ];
 

@@ -11,14 +11,24 @@
                 <label for="goal_id" class="form-label">Цель</label>
                 <select name="goal_id" class="form-control" required>
                     @foreach($goals as $goal)
-                        <option value="{{ $goal->id }}">{{ $goal->title }}</option>
+                        <option value="{{ $goal->id }}">{{ $goal->id }} {{ $goal->title }}</option>
                     @endforeach
                 </select>
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Название</label>
+                <label class="form-label">Название (RU)</label>
                 <input type="text" name="title" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Название (KZ)</label>
+                <input type="text" name="title_kk" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Название (EN)</label>
+                <input type="text" name="title_en" class="form-control">
             </div>
 
             <div class="mb-3">
@@ -37,8 +47,18 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Единица измерение</label>
-                <input type="text" step="0.01" name="unit" class="form-control">
+                <label class="form-label">Единица измерения (RU)</label>
+                <input type="text" name="unit" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Единица измерения (KZ)</label>
+                <input type="text" name="unit_kk" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Единица измерения (EN)</label>
+                <input type="text" name="unit_en" class="form-control">
             </div>
 
             <div class="mb-3">

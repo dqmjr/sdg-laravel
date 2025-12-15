@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SdgGoal;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -33,14 +34,39 @@ class HomeController extends Controller
                 'code'  => $goal->code,
                 'url'   => $goal->url,
                 'data'  => [
-                    // Здесь ты вставляешь реальные данные для графика
-                    // например пока заглушки:
                     ['title' => 'Индикатор 1', 'status' => 'done', 'value' => 40, 'unit' => '%', 'url' => $goal->url],
                     ['title' => 'Индикатор 2', 'status' => 'process', 'value' => 60, 'unit' => '%', 'url' => $goal->url],
                 ]
             ];
         });
 
-        return view('home', compact('goals', 'chartData'));
+        if (Auth::check()) {
+            $currentLang = Auth::user()->language ?? 'ru';
+        } else {
+            $currentLang = session('locale', 'ru');
+        }
+
+        $languages = [
+            'ru' => 'RU',
+            'kk' => 'QZ',
+            'en' => 'ENG',
+        ];
+
+        return view('home', compact('goals', 'chartData', 'currentLang', 'languages'));
+    }
+
+    public function setLocale(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $locale = $request->input('user_locale', 'ru');
+
+        if(auth()->check()) {
+            $user = auth()->user();
+            $user->language = $locale;
+            $user->save();
+        }
+
+        session(['locale' => $locale]);
+
+        return response()->json(['status' => 'ok']);
     }
 }

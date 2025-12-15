@@ -21,8 +21,11 @@ class SdgGoalController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'code' => 'required|max:5',
-            'title' => 'required',
+            'code'     => 'required|max:5',
+            'title'    => 'required|string|max:255',
+            'title_kk' => 'nullable|string|max:255',
+            'title_en' => 'nullable|string|max:255',
+            'color'    => 'nullable|string|max:7', // цвет
         ]);
 
         SdgGoal::create($request->all());
@@ -39,8 +42,11 @@ class SdgGoalController extends Controller
     public function update(Request $request, SdgGoal $goal)
     {
         $request->validate([
-            'code' => 'required|max:5',
-            'title' => 'required',
+            'code'     => 'required|max:5',
+            'title'    => 'required|string|max:255',
+            'title_kk' => 'nullable|string|max:255',
+            'title_en' => 'nullable|string|max:255',
+            'color'    => 'nullable|string|max:7',
         ]);
 
         $goal->update($request->all());

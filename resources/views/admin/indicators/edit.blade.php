@@ -20,8 +20,18 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Название</label>
+                <label class="form-label">Название (RU)</label>
                 <input type="text" name="title" value="{{ $indicator->title }}" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Название (KZ)</label>
+                <input type="text" name="title_kk" value="{{ $indicator->title_kk }}" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Название (EN)</label>
+                <input type="text" name="title_en" value="{{ $indicator->title_en }}" class="form-control">
             </div>
 
             <div class="mb-3">
@@ -40,8 +50,18 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Единица измерение</label>
+                <label class="form-label">Единица измерения (RU)</label>
                 <input type="text" name="unit" value="{{ $indicator->unit }}" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Единица измерения (KZ)</label>
+                <input type="text" name="unit_kk" value="{{ $indicator->unit_kk }}" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Единица измерения (EN)</label>
+                <input type="text" name="unit_en" value="{{ $indicator->unit_en }}" class="form-control">
             </div>
 
             <div class="mb-3">

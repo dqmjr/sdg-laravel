@@ -1,78 +1,6 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Цели устойчивого развития - Казахстан</title>
-    <meta name="description" content="Обзор прогресса Целей устойчивого развития (ЦУР) в Казахстане"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&&display=swap"
-        rel="stylesheet"/>
-
-    <link rel="stylesheet" href="{{ asset('/css/style.css') }}"/>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-<header class="header">
-    <div class="container">
-        <div class="header__content">
-            <div class="header__logo">
-                <img src="{{ asset('/img/logo.svg') }}" alt="logo"/>
-            </div>
-            <div class="header__admin-link" style="display: flex">
-                @guest
-                    @if (Route::has('login'))
-
-                    @endif
-                @else
-                    <a href="{{ route('admin.goals.index') }}" class="download-btn"
-                       style="margin-right: 10px; padding: 8px 10px; border-radius: 8px; font-size: 16px;line-height: 150%; display: flex;align-items: center">
-                        Админ панель
-                    </a>
-
-                    <a class="download-btn" data-lang="kk"
-                       href="{{ route('logout') }}"
-                       onclick="event.preventDefault();
-                        if (confirm('Вы действительно хотите выйти?')) {
-                            document.getElementById('logout-form').submit();
-                        }">
-                        {{ __('Выйти') }}
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
-                @endguest
-
-                <div class="header__language">
-                    <div class="header__languages">
-                        <div class="language-switcher">
-                            <div class="language-current">
-                                <span class="language-name">RU</span>
-                                <svg width="14" height="8" viewBox="0 0 14 8" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M1 1L7 7L13 1" stroke="white" stroke-width="2"
-                                          stroke-linecap="round"
-                                          stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <div class="language-dropdown">
-                                <a href="#" class="language-option" data-lang="kk">
-                                    <span class="language-name">QZ</span>
-                                </a>
-                                <a href="#" class="language-option" data-lang="en">
-                                    <span class="language-name">ENG</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+@extends('layouts.app')
+@section('title', 'Главная')
+@section('content')
 
 <main class="main">
     <section class="hero">
@@ -87,7 +15,6 @@
         >
             <source data-v-f94c853b="" src="{{ asset('/media/bg.mp4" type="video/mp4') }}">
             <source src="{{ asset('/media/bg.webm') }}" type="video/webm">
-            Ваш браузер не поддерживает формат WebM.
         </video>
         <div class="container">
             <div class="hero__content">
@@ -104,7 +31,11 @@
                             </div>
 
                             <div class="card-item--title">
-                                {{ $goal->title }}
+                                @php
+                                    $locale = app()->getLocale();
+                                    $titleField = 'title_' . $locale;
+                                @endphp
+                                {{ $goal->$titleField ?? $goal->title }}
                             </div>
 
                             <div class="card-item--icon">
@@ -121,27 +52,27 @@
             <div class="links-content">
                 <a href="https://economy.kz/ru/Celi_ustojchivogo_razvitija/About_TSUR/">
                     <div class="links-content__link">
-                        О реализации Целей устойчивого<br> развития в Казахстане
+                        {!! __('messages.about_implementation_sdg') !!}
                     </div>
                 </a>
                 <a href="https://sustainabledevelopment.un.org/">
                     <div class="links-content__link">
-                        Платформа знаний<br> ЦУР ООН
+                        {!! __('messages.sdg_knowledge_platform') !!}
                     </div>
                 </a>
                 <a href="https://unstats.un.org/home/">
                     <div class="links-content__link">
-                        Статистический<br> отдел ООН
+                        {!! __('messages.statistics_division') !!}
                     </div>
                 </a>
                 <a href="https://www.unece.org/unece-and-the-sdgs/unece-and-the-sdgs.html">
                     <div class="links-content__link" style="white-space: nowrap">
-                        ЕЭК ООН и ЦУР
+                        {!! __('messages.unece_and_sdg') !!}
                     </div>
                 </a>
                 <a href="https://datatopics.worldbank.org/sdgs/index.html">
                     <div class="links-content__link">
-                        Показатели Всемирного Развития <br>Цели Устойчивого Развития
+                        {!! __('messages.world_development_indicators_sdg') !!}
                     </div>
                 </a>
             </div>
@@ -151,27 +82,27 @@
     <section class="chart-section">
         <div class="container">
             <div class="chart-content">
-                <h1 class="chart-title">Обзор ЦУР: <span>Казахстан</span></h1>
-                <h3 class="chart-instruction">Нажмите на столбцы, чтобы увидеть прогресс каждого индикатора.</h3>
+                <h1 class="chart-title">{!! __('messages.review_sdg') !!}: <span>{!! __('messages.kazakhstan') !!}</span></h1>
+                <h3 class="chart-instruction">{!! __('messages.click_on_columns') !!}</h3>
                 <div class="chart-container">
                     <div class="chart-block-top">
                         <div class="chart-block-indecators">
                             <div class="chart-block-indecator-item">
                                 <div class="tooltip-cube bad"></div>
                                 <div class="chart-block-indecator-item-title">
-                                    Ухудшение показателя
+                                    {!! __('messages.deterioration_of_indicator') !!}
                                 </div>
                             </div>
                             <div class="chart-block-indecator-item">
                                 <div class="tooltip-cube good"></div>
                                 <div class="chart-block-indecator-item-title">
-                                    Улучшение показателя
+                                    {!! __('messages.improvement_of_indicator') !!}
                                 </div>
                             </div>
                             <div class="chart-block-indecator-item">
                                 <div class="tooltip-cube neutral"></div>
                                 <div class="chart-block-indecator-item-title">
-                                    Без изменений
+                                    {!! __('messages.no_changes') !!}
                                 </div>
                             </div>
                         </div>
@@ -195,8 +126,8 @@
     <section class="about-section">
         <div class="container">
             <div class="about-content">
-                <h2 class="about-title">О проекте</h2>
-                <h3 class="about-subtitle">17 целей преобразят наш мир</h3>
+                <h2 class="about-title">{!! __('messages.about_project') !!}</h2>
+                <h3 class="about-subtitle">{!! __('messages.17_goals_transform_our_world') !!}</h3>
 
                 <div class="sdg-dots">
                     <div class="dot" style="background-color: #ef384c;"></div>
@@ -220,69 +151,40 @@
 
                 <div class="about-text">
                     <div class="about-text-conten">
-                        <a href="">Цели в области устойчивого развития (ЦУР)</a>
-                        представляют собой универсальный призыв к действиям, направленным на то, чтобы покончить с
-                        нищетой, защитить планету и улучшить жизнь и перспективы каждого человека, где бы он ни
-                        находился. Эти 17 целей были приняты всеми
-                        государствами-членами ООН в 2015 году в рамках
-                        <a href=""> 2030 Повестки дня в области устойчивого развития.</a>
+                        <a href="">{!! __('messages.sdg') !!}</a>
+                        {!! __('messages.sdg_represent_universal_appeal') !!}
+                        <a href=""> {!! __('messages.2030_sustainable_development_agenda') !!}</a>
                     </div>
                 </div>
                 <div class="text-block">
                     <p>
-                        Для осуществления мониторинга и обзора процесса реализаций 17 целей в области устойчивого
-                        развития (ЦУР) и 169 задач новой повестки дня используется система глобальных показателей,
-                        разработанных Межучрежденческой и
-                        экспертной группой по показателям достижения Целей в области устойчивого развития (МУЭГ-ЦУР).
+                        {!! __('messages.monitor_review_implementation_process') !!}
                     </p>
                     <p>
-                        С целью содействия осуществлению мониторинга прогресса в реализации целей и задач ЦУР на
-                        национальном уровне каждое государство-член ООН может в дополнение к глобальным индикаторам
-                        разработать национальные индикаторы.
+                        {!! __('messages.order_facilitate_monitoring_progress') !!}
                     </p>
                     <p>
-                        Казахстан национализировал глобальные индикаторы ЦУР и на сегодняшний день система мониторинга
-                        включает 280 индикаторов, из которых 205 глобальных и 75 национальных индикаторов. Все имеющиеся
-                        данные по каждой ЦУР
-                        представлены ниже.
+                        {!! __('messages.kazakhstan_nationalized_global_sdg_indicators') !!}
                     </p>
                     <p>
-                        В настоящей Национальной платформе отчетности по Целям устойчивого развития (ЦУР) опубликованы
-                        открытые данные по статистике ЦУР, предоставляемые Бюро национальной статистики Агентства по
-                        стратегическому планированию и
-                        реформам Республики Казахстан (далее – Бюро) в качестве центрального координатора отчетности по
-                        ЦУР.
+                        {!! __('messages.national_reporting_platform_sdg') !!}
                     </p>
                     <p>
-                        Органы государственной статистики обеспечивают пользователям равные права на одновременный
-                        доступ к качественной официальной статистической информации, в том числе в формате
-                        машиночитаемых данных и статистической
-                        методологии, путем их размещения на интернет-ресурсе органов государственной статистики и
-                        интернет-портале открытых данных веб-портала «электронного правительства».
+                        {!! __('messages.state_statistics_bodies_ensure_equal_rights_users') !!}
                     </p>
                     <p>
-                        Пользователи имеют право: 1) одновременного и равного доступа к официальной статистической
-                        информации в соответствии с графиком распространения официальной статистической информации; 2)
-                        использования официальной
-                        статистической информации в собственных целях со ссылкой на источник.
+                        {!! __('messages.users_have_right_simultaneous_equal_access') !!}
                     </p>
                     <p>
-                        Условия использования официальной статистической информации Пользователи без заключения договора
-                        c Бюро национальной статистики Агентства по стратегическому планированию и реформам Республики
-                        Казахстан могут использовать
-                        официальную статистическую информацию (в том числе повторно) свободно, бесплатно, бессрочно и
-                        без ограничения территории использования, в том числе копировать, публиковать, распространять со
-                        ссылкой на источник, видоизменять
-                        и объединять с другой информацией, а так же использовать с целью создания программных продуктов
-                        и приложений.
+                        {!! __('messages.terms_official_statistical_information') !!}
                     </p>
                 </div>
                 <div class="download-section">
                     <a href="" class="download-btn">
-                        Скачать все данные
+                        {!! __('messages.download_all_data') !!}
                     </a>
                     <div class="file-info">
-                        Размер: 3.3 MB, Последний раз данные обновлялись - Jun 20, 2025
+                        {!! __('messages.size_and_last_uploaded') !!}
                     </div>
                 </div>
             </div>
@@ -290,78 +192,24 @@
     </section>
 </main>
 
-<!-- Footer -->
-<footer class="footer">
-    <div class="footer-top">
-        <div class="container">
-            <div class="footer-logo">
-                <img src="{{ asset('img/stat-gov-logo.svg') }}" alt=""/>
-                <div class="footer-logo-text">
-                    Бюро Национальной статистики Агентства по стратегическому планированию и реформам Республики
-                    Казахстан
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <div class="container">
-            <div class="footer-bottom-text">
-                <p>© 2025 Все права защищены</p>
-            </div>
-            <div class="social-links">
-                <a href="#" class="social-link" aria-label="Facebook">
-                    <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M16.5596 0.653809C25.4071 0.653809 32.6093 7.8507 32.6094 16.6987C32.6094 25.5439 25.4071 32.7437 16.5596 32.7437C7.715 32.7436 0.515625 25.5438 0.515625 16.6987C0.515691 7.85075 7.71505 0.653891 16.5596 0.653809ZM16.5596 2.0083C8.46285 2.00838 1.87018 8.5986 1.87012 16.6987C1.87012 24.796 8.46281 31.3803 16.5596 31.3804C24.6623 31.3804 31.249 24.796 31.249 16.6987C31.249 8.59855 24.6622 2.0083 16.5596 2.0083ZM21.7051 6.48096V10.314H19.207C18.7965 10.314 18.2159 10.5164 18.2158 11.396V13.7192H21.7607L21.3535 17.6694H18.2158V28.8579H13.5674V17.6694H11.3594V13.7192H13.5674V11.1528C13.5674 9.32866 14.4386 6.46631 18.2656 6.46631L21.7051 6.48096Z"
-                            fill="white"
-                        />
-                    </svg>
-                </a>
-                <a href="#" class="social-link" aria-label="Twitter">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 33 33" fill="none">
-                        <path
-                            d="M16.631 1.64155C8.52539 1.64155 1.93591 8.23142 1.93591 16.3317C1.93591 24.429 8.52539 31.013 16.631 31.013C24.7249 31.013 31.3085 24.429 31.3085 16.3317C31.3085 8.23142 24.7249 1.64155 16.631 1.64155ZM16.631 32.3767C7.77465 32.3767 0.578125 25.1768 0.578125 16.3317C0.578125 7.48357 7.77465 0.286621 16.631 0.286621C25.4669 0.286621 32.6693 7.48357 32.6693 16.3317C32.6693 25.1768 25.4669 32.3767 16.631 32.3767Z"
-                            fill="white"
-                        />
-                        <path
-                            d="M23.9034 7.75551L18.4808 20.4985C18.1118 21.3656 16.858 21.2877 16.5991 20.3817L15.2776 15.7563C15.1827 15.4241 14.923 15.1645 14.5908 15.0695L9.96551 13.748C9.05943 13.4891 8.98158 12.2353 9.84867 11.8664L22.5917 6.4438C23.42 6.09132 24.2558 6.92718 23.9034 7.75551Z"
-                            fill="white"
-                        />
-                    </svg>
-                </a>
-                <a href="#" class="social-link" aria-label="Instagram">
-                    <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M16.7567 0.653809C25.5984 0.653809 32.7947 7.8507 32.7948 16.6987C32.7948 25.5439 25.5984 32.7437 16.7567 32.7437C7.90042 32.7436 0.706909 25.5438 0.706909 16.6987C0.706976 7.85075 7.90046 0.653894 16.7567 0.653809ZM16.7567 2.0083C8.65706 2.00839 2.07026 8.5986 2.07019 16.6987C2.07019 24.796 8.65702 31.3803 16.7567 31.3804C24.8506 31.3804 31.4403 24.796 31.4403 16.6987C31.4402 8.59855 24.8506 2.0083 16.7567 2.0083ZM23.2245 8.00146C24.456 8.00146 25.4626 9.00133 25.4628 10.2271V23.1724C25.4628 24.3983 24.4562 25.4077 23.2245 25.4077H10.2802C9.06031 25.4076 8.05457 24.3982 8.05457 23.1724V10.2271C8.05477 9.00141 9.06043 8.00159 10.2802 8.00146H23.2245ZM9.98132 22.7124C9.98148 23.0965 10.2955 23.4038 10.6766 23.4038H22.7968C23.1778 23.4037 23.489 23.0964 23.4891 22.7124V15.354H21.955C22.1015 15.8319 22.1864 16.3332 22.1864 16.8491C22.1864 19.7466 19.7615 22.0961 16.7645 22.0962C13.7792 22.0962 11.3593 19.7467 11.3593 16.8491C11.3593 16.3331 11.4392 15.8319 11.5887 15.354H9.98132V22.7124ZM16.7645 13.2749C14.8438 13.2749 13.2774 14.7877 13.2772 16.6587C13.2772 18.5327 14.8437 20.0493 16.7645 20.0493C18.7087 20.0492 20.2684 18.5326 20.2684 16.6587C20.2683 14.7878 18.7086 13.275 16.7645 13.2749ZM20.7352 9.93115C20.3012 9.93115 19.9491 10.2803 19.9491 10.7144V12.5796C19.9492 13.0253 20.3012 13.3687 20.7352 13.3687H22.7001C23.131 13.3685 23.4891 13.0252 23.4891 12.5796V10.7144C23.4891 10.2804 23.1311 9.93128 22.7001 9.93115H20.7352Z"
-                            fill="white"
-                        />
-                    </svg>
-                </a>
-                <a href="#" class="social-link" aria-label="YouTube">
-                    <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M16.6914 0.653809C25.5419 0.653809 32.7353 7.8507 32.7354 16.6987C32.7354 25.5439 25.5419 32.7437 16.6914 32.7437C7.83805 32.7436 0.644531 25.5438 0.644531 16.6987C0.644598 7.85075 7.83809 0.653893 16.6914 0.653809ZM16.6914 2.0083C8.59176 2.00839 2.00495 8.5986 2.00488 16.6987C2.00488 24.796 8.59172 31.3803 16.6914 31.3804C24.7912 31.3804 31.3779 24.796 31.3779 16.6987C31.3779 8.59855 24.7911 2.0083 16.6914 2.0083ZM16.6973 15.0894C18.873 15.0894 21.0664 15.0892 23.2363 15.3354C24.1395 15.4381 24.8992 16.1275 25.1133 17.0483C25.4212 18.371 25.4219 19.8116 25.4219 21.1841C25.4219 22.5359 25.4212 23.9788 25.1133 25.2954C24.8992 26.2309 24.1395 26.9144 23.2275 27.0171C21.0664 27.2634 18.873 27.2632 16.6914 27.2632C14.5096 27.2632 12.3156 27.2634 10.1543 27.0171C9.23649 26.9144 8.4797 26.2309 8.26855 25.2954C7.96067 23.9788 7.96094 22.5359 7.96094 21.1841C7.96094 19.8116 7.9665 18.371 8.26855 17.0483C8.48556 16.1275 9.24821 15.4382 10.1543 15.3354C12.3244 15.0891 14.5213 15.0894 16.6973 15.0894ZM13.0928 19.1304V23.7319C13.0928 24.1424 13.1279 24.427 13.1836 24.5972C13.2921 24.8934 13.527 25.0376 13.8701 25.0376C14.2601 25.0376 14.65 24.7968 15.0752 24.3159V24.9468H16.125V19.1304H15.0752V23.5767C14.8406 23.911 14.6174 24.0728 14.4062 24.0728L14.1602 23.8257C14.1486 23.7928 14.1484 23.6609 14.1484 23.4155V19.1304H13.0928ZM17.043 17.1392V24.9468H18.1016V24.3892C18.4475 24.829 18.82 25.0375 19.1895 25.0376C19.6117 25.0376 19.8875 24.8143 20.0312 24.3833C20.0987 24.1311 20.1396 23.7499 20.1396 23.2046V20.8784C20.1396 20.3389 20.0987 19.9431 20.0312 19.7114C19.8876 19.2774 19.6117 19.0601 19.1895 19.0601C18.7995 19.0602 18.4358 19.2775 18.1016 19.688V17.1392H17.043ZM22.5449 19.0601C22.0053 19.0601 21.5911 19.254 21.2861 19.6528C21.0576 19.9431 20.9551 20.4035 20.9551 21.0337V23.0669C20.9551 23.6883 21.0722 24.1428 21.292 24.439C21.5999 24.8378 22.017 25.0376 22.5742 25.0376C23.1283 25.0375 23.5593 24.829 23.8438 24.3979C23.9728 24.2161 24.0576 24.0017 24.0986 23.7642C24.1016 23.6614 24.1221 23.4271 24.1221 23.0815V22.9341H23.043C23.043 23.3532 23.0196 23.591 23.0166 23.6499C22.955 23.9313 22.8028 24.0726 22.5449 24.0728C22.1813 24.0728 22.0049 23.8056 22.0049 23.2603V22.2368H24.1221V21.0337C24.122 20.4034 24.0079 19.9431 23.791 19.6528C23.4978 19.2541 23.0756 19.0601 22.5449 19.0601ZM9.25977 17.1392V18.2388H10.5039V24.9468H11.6738V18.2388H12.9463V17.1392H9.25977ZM18.626 20.0112C18.934 20.0113 19.0811 20.2754 19.0811 20.8032V23.2896C19.0811 23.8174 18.934 24.0727 18.626 24.0728L18.0977 23.8179V20.2632L18.626 20.0112ZM22.5449 20.0112C22.8911 20.0113 23.0615 20.2753 23.0615 20.8179V21.3608H22.0078V20.8179C22.0079 20.2752 22.184 20.0112 22.5449 20.0112ZM16.4463 8.07959C16.9828 8.07966 17.3933 8.27944 17.6895 8.68408C17.9122 8.9832 18.0146 9.44343 18.0146 10.0737V12.1294C18.0146 12.7541 17.9123 13.218 17.6895 13.5142C17.3933 13.9129 16.9828 14.1186 16.4463 14.1187C15.9184 14.1187 15.5101 13.913 15.208 13.5142C14.9823 13.2179 14.8711 12.754 14.8711 12.1294V10.0737C14.8711 9.44357 14.9824 8.9832 15.208 8.68408C15.5101 8.27936 15.9184 8.07959 16.4463 8.07959ZM19.9619 12.4878C19.9619 12.7306 19.962 12.8566 19.9736 12.8979L20.2295 13.1499C20.4346 13.1496 20.6631 12.9771 20.9004 12.6489V8.15283H21.9619V14.0298H20.9004V13.397C20.4782 13.8748 20.0706 14.1186 19.6777 14.1187C19.3376 14.1187 19.1026 13.9774 19 13.6782C18.9355 13.4993 18.9062 13.2176 18.9062 12.8013V8.15283H19.9619V12.4878ZM12.8623 9.24365L13.666 6.13818H14.8623L13.4463 10.8306V14.0298H12.2607V10.8306C12.1522 10.2763 11.9154 9.44298 11.5371 8.34326C11.2849 7.61015 11.0324 6.87129 10.7773 6.13818H12.0264L12.8623 9.24365ZM16.4463 9.0415C16.112 9.0415 15.9355 9.30851 15.9355 9.854V12.3354C15.9356 12.8778 16.1121 13.1499 16.4463 13.1499C16.7921 13.1498 16.9589 12.8776 16.959 12.3354V9.854C16.959 9.30866 16.7921 9.04165 16.4463 9.0415Z"
-                            fill="white"
-                        />
-                    </svg>
-                </a>
-            </div>
-        </div>
-    </div>
-</footer>
 
 @php
-    $chartData = $goals->map(function($goal) {
+    $locale = app()->getLocale();
+
+    $chartData = $goals->map(function($goal) use ($locale) {
+        $goalTitleField = 'title_' . $locale;
         return [
             'code'  => $goal->code,
-            'title' => $goal->title,
+            'title' => $goal->$goalTitleField ?? $goal->title, // берём перевод, если есть
             'color' => $goal->color,
-            'data'  => $goal->indicators->map(function($indicator) {
+            'data'  => $goal->indicators->map(function($indicator) use ($locale) {
+                $indicatorTitleField = 'title_' . $locale;
+                $indicatorUnitField = 'unit_' . $locale;
                 return [
-                    'title'  => $indicator->title,
+                    'title'  => $indicator->$indicatorTitleField ?? $indicator->title,
                     'status' => $indicator->status,
                     'value'  => $indicator->value,
-                    'unit'   => $indicator->unit,
+                    'unit'   => $indicator->$indicatorUnitField ?? $indicator->unit,
                     'url'    => $indicator->url,
                 ];
             })->toArray(),
@@ -374,12 +222,6 @@
     window.chartData = chartData;
 </script>
 
-<script src="{{ asset('/js/chart.js') }}"></script>
-<script src="{{ asset('/js/jquery-3.0.0.min.js') }}"></script>
-<script src="{{ asset('/js/slick.min.js') }}"></script>
-<script src="{{ asset('/js/jquery.waypoints.min.js') }}"></script>
-<script src="{{ asset('/js/jquery.inputmask.bundle.js') }}"></script>
-<script src='{{ asset('/js/script.js') }}'></script>
-</body>
-</html>
+@endsection
+
 

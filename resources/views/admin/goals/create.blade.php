@@ -13,8 +13,18 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Название</label>
+                <label class="form-label">Название (RU)</label>
                 <input type="text" name="title" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Название (KK)</label>
+                <input type="text" name="title_kk" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Название (EN)</label>
+                <input type="text" name="title_en" class="form-control">
             </div>
 
             <div class="mb-3">
