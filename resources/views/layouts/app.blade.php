@@ -15,7 +15,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
+<body class="{{ request()->routeIs('home') ? 'page-home' : 'page-inner' }}">
 <header class="header">
     <div class="container">
         <div class="header__content">
@@ -23,13 +23,14 @@
                 <a href="{{url('/')}}"><img src="{{ asset('/img/logo.svg') }}" alt="logo"/></a>
             </div>
 
-            <ul>
+            <ul class="header__main-menu">
                 <li><a href="{{ route('publications', ['locale' => $currentLang]) }}">{!! __('messages.publications') !!}</a></li>
                 <li><a href="{{ route('millennium-development-goals', ['locale' => $currentLang]) }}">{!! __('messages.millennium_development_goals') !!}</a></li>
                 <li><a href="{{ route('events-activities', ['locale' => $currentLang]) }}">{!! __('messages.events_activities') !!}</a></li>
                 <li><a href="{{ route('useful-resources', ['locale' => $currentLang]) }}">{!! __('messages.useful_resources') !!}</a></li>
                 <li><a href="{{ route('contacts', ['locale' => $currentLang]) }}">{!! __('messages.contacts') !!}</a></li>
             </ul>
+
 
             <div class="header__admin-link" style="display: flex">
                 @guest
