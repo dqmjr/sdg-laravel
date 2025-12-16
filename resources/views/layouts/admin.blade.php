@@ -9,7 +9,7 @@
 
 <body>
 <div class="admin-sidebar">
-
+    @auth
     <div class="sidebar">
         <a class="navbar-brand mb-4" href="{{ url('/') }}">
             <div class="header__logo">
@@ -42,7 +42,7 @@
             </form>
         @endguest
     </div>
-
+    @endauth
     <div class="content">
         @yield('content')
     </div>
