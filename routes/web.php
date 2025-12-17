@@ -11,8 +11,8 @@ use App\Http\Controllers\HomeController;
 Auth::routes(['register' => false]);
 
 
-Route::get('lang/{locale}', function($locale) {
-    if (in_array($locale, ['kk','ru','en'])) {
+Route::get('lang/{locale}', function ($locale) {
+    if (in_array($locale, ['kk', 'ru', 'en'])) {
         session(['locale' => $locale]);
     }
     return redirect()->back();
@@ -29,7 +29,6 @@ Route::group([], function () {
     Route::get('/useful-resources', [PageController::class, 'useful_resources'])->name('useful-resources');
     Route::get('/contacts', [PageController::class, 'contacts'])->name('contacts');
 });
-
 Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'ru|en']], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home.lang');
     Route::get('/publications', [PageController::class, 'publications'])->name('publications.lang');

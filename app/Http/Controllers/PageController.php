@@ -49,6 +49,7 @@ class PageController extends Controller
 
         session(['locale' => $locale]);
 
+        // нормализуем путь
         $currentPath = trim($currentPath, '/');
 
         $parts = $currentPath === '' ? [] : explode('/', $currentPath);
@@ -58,16 +59,19 @@ class PageController extends Controller
             array_shift($parts);
         }
 
-
+        // собираем новый URL
         if ($locale === 'kk') {
+            // казахский без префикса
             $newUrl = '/' . implode('/', $parts);
         } else {
+            // русский и английский с префиксом
             $newUrl = '/' . $locale;
             if (!empty($parts)) {
                 $newUrl .= '/' . implode('/', $parts);
             }
         }
 
+        // если путь пустой — просто /
         if ($newUrl === '/') {
             return response()->json(['redirect' => '/']);
         }

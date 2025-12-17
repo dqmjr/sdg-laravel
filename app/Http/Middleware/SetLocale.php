@@ -8,9 +8,6 @@ use Illuminate\Http\Request;
 
 class SetLocale
 {
-    /**
-     * Handle an incoming request.
-     */
     public function handle(Request $request, Closure $next)
     {
         $supported = ['kk', 'ru', 'en'];
