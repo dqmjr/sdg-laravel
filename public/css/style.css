@@ -85,6 +85,24 @@ body {
     gap: 10px;
 }
 
+.header {
+    height: 72px;
+    backdrop-filter: blur(12px);
+}
+
+.page-home .header {
+
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.page-inner .header {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.header__logo a {
+    display: flex;
+    align-items: center;
+}
 
 .hero {
     /*background-image: url("../img/head-bg.png");*/
