@@ -3,29 +3,26 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\PageController;
 use App\Http\Controllers\Admin\SdgGoalController;
 use App\Http\Controllers\Admin\SdgIndicatorController;
-
-Route::get('lang/{locale}', function($locale) {
-    // Проверяем допустимые языки
-    if (in_array($locale, ['en', 'ru', 'kk'])) {
-        session(['locale' => $locale]);
-    }
-    return redirect()->back();
-});
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\HomeController;
 
 Auth::routes(['register' => false]);
 
-use App\Http\Controllers\HomeController;
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('lang/{locale}', function($locale) {
+    if (in_array($locale, ['kk','ru','en'])) {
+        session(['locale' => $locale]);
+    }
+    return redirect()->back();
+})->name('set.lang');
 
 
+Route::post('/locale', [PageController::class, 'setLocale'])->name('user.locale');
 
-Route::post('/set-locale', [PageController::class, 'setLocale'])->name('set.locale');
-
-Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'ru|kk|en']], function () {
+Route::group([], function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/publications', [PageController::class, 'publications'])->name('publications');
     Route::get('/millennium-development-goals', [PageController::class, 'millennium_development_goals'])->name('millennium-development-goals');
     Route::get('/events-activities', [PageController::class, 'events_activities'])->name('events-activities');
@@ -33,24 +30,23 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'ru|kk|en']], func
     Route::get('/contacts', [PageController::class, 'contacts'])->name('contacts');
 });
 
-Route::post('/locale', [App\Http\Controllers\HomeController::class, 'setLocale'])->name('user.locale');
-
-Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
-    Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-    Route::post('/users', [UserController::class, 'store'])->name('users.store');
-    Route::put('/users/{user}/reset-password', [UserController::class, 'resetPassword'])->name('users.reset-password');
-
-    Route::resource('users', UserController::class)->except(['index', 'create', 'store']);
+Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'ru|en']], function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home.lang');
+    Route::get('/publications', [PageController::class, 'publications'])->name('publications.lang');
+    Route::get('/millennium-development-goals', [PageController::class, 'millennium_development_goals'])->name('millennium-development-goals.lang');
+    Route::get('/events-activities', [PageController::class, 'events_activities'])->name('events-activities.lang');
+    Route::get('/useful-resources', [PageController::class, 'useful_resources'])->name('useful-resources.lang');
+    Route::get('/contacts', [PageController::class, 'contacts'])->name('contacts.lang');
 });
 
-Route::redirect('/home', '/', 301);
-
-Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', function () {
         return redirect()->route('admin.goals.index');
     });
 
+    Route::resource('users', UserController::class);
     Route::resource('goals', SdgGoalController::class);
     Route::resource('indicators', SdgIndicatorController::class);
 });
+
+Route::redirect('/home', '/', 301);

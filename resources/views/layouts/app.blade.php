@@ -15,7 +15,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body class="{{ request()->routeIs('home') ? 'page-home' : 'page-inner' }}">
+<body class="{{ request()->routeIs('home') || request()->routeIs('home.lang') ? 'page-home' : 'page-inner' }}">
 @include('partials.header')
 
 
