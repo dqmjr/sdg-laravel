@@ -1,5 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Sustainable development goals')
+@section('title', __('messages.sdg_page_title'))
+@section('description', __('messages.sdg_page_description'))
 @section('content')
 
 <main class="main">

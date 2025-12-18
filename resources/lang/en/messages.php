@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'sdg_page_title' => 'Sustainable Development Goals - Kazakhstan',
+    'sdg_page_description' => 'Review of progress of the Sustainable Development Goals (SDGs) in Kazakhstan',
     'admin_panel' => 'Admin panel',
     'logout' => 'Logout',
     'publications' => 'SDG Publications',
