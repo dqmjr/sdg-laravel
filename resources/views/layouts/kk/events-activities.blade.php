@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'События и мероприятия')
+@section('title', 'Оқиғалар мен іс-шаралар')
 
 @section('content')
 

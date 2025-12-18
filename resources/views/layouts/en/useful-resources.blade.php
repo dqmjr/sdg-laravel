@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Полезные ресурсы по ЦУР')
+@section('title', 'Useful resources on SDG')
 
 @section('content')
 

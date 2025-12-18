@@ -77,13 +77,18 @@
                             </div>
                             <div class="language-dropdown">
                                 @foreach($languages as $langCode => $langName)
-                                    @if($langCode != $currentLang)
+                                    @if($langCode !== $currentLang)
                                         @php
-                                            $newSegments = $segments;
-                                            $newSegments[0] = $langCode;
-                                            $url = url(implode('/', $newSegments));
+                                            $currentPath = request()->path();
+                                            $segments = explode('/', $currentPath);
+                                            if(in_array($segments[0], ['kk','ru','en'])) {
+                                                array_shift($segments);
+                                            }
+                                            $newPath = $langCode === 'kk'
+                                                ? '/' . implode('/', $segments)
+                                                : '/' . $langCode . '/' . implode('/', $segments);
                                         @endphp
-                                        <a href="{{ $url }}">{{ $langName }}</a>
+                                        <a href="{{ url($newPath) }}">{{ $langName }}</a>
                                     @endif
                                 @endforeach
                             </div>

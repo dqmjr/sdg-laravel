@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Полезные ресурсы по ЦУР')
+@section('title', 'ОДМ бойынша пайдалы сілтемелер')
 
 @section('content')
 

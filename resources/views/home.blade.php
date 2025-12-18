@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Главная')
+@section('title', 'Sustainable development goals')
 @section('content')
 
 <main class="main">

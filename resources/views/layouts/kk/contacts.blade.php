@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'publications')
+@section('title', 'Байланыстар')
 
 @section('content')
 
     <div id="main-content" class="container" role="main" style="padding-top: 150px; padding-bottom: 80px; ">
         <div class="content-page">
             <div class="top-block">
-                <div class="block-title">Контакты</div>
+                <div class="block-title">Байланыстар</div>
             </div>
             <div class="mb-2">
                 Халықаралық ынтымақтастық және орнықты даму департаменті
