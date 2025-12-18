@@ -20,6 +20,8 @@ class SdgIndicator extends Model
         'unit_kk',
         'unit_en',
         'url',
+        'url_kk',
+        'url_en',
     ];
 
     /**

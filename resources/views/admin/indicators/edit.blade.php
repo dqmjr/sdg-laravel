@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
     <div class="container">
@@ -65,8 +65,18 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Ссылка</label>
+                <label class="form-label">Ссылка (RU)</label>
                 <input type="url" name="url" value="{{ $indicator->url }}" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Ссылка (KK)</label>
+                <input type="url" name="url_en" value="{{ $indicator->url_en }}" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Ссылка (EN)</label>
+                <input type="url" name="url_en" value="{{ $indicator->url_en }}" class="form-control">
             </div>
 
             <button class="btn btn-primary">Сохранить</button>

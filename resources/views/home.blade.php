@@ -205,12 +205,13 @@
             'data'  => $goal->indicators->map(function($indicator) use ($locale) {
                 $indicatorTitleField = 'title_' . $locale;
                 $indicatorUnitField = 'unit_' . $locale;
+                $indicatorUrlField = 'url_' . $locale;
                 return [
                     'title'  => $indicator->$indicatorTitleField ?? $indicator->title,
                     'status' => $indicator->status,
                     'value'  => $indicator->value,
                     'unit'   => $indicator->$indicatorUnitField ?? $indicator->unit,
-                    'url'    => $indicator->url,
+                    'url'    => $indicator->$indicatorUrlField ?? $indicator->url,
                 ];
             })->toArray(),
         ];

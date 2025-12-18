@@ -34,6 +34,8 @@ class SdgIndicatorController extends Controller
             'unit_kk'   => 'nullable|string|max:255',
             'unit_en'   => 'nullable|string|max:255',
             'url'       => 'nullable|url',
+            'url_kk'    => 'nullable|url',
+            'url_en'    => 'nullable|url',
         ]);
 
         SdgIndicator::create($request->all());
@@ -62,6 +64,8 @@ class SdgIndicatorController extends Controller
             'unit_kk'   => 'nullable|string|max:1000',
             'unit_en'   => 'nullable|string|max:1000',
             'url'       => 'nullable|url',
+            'url_kk'    => 'nullable|url',
+            'url_en'    => 'nullable|url',
         ]);
 
         $indicator->update($request->all());

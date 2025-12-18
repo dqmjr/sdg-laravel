@@ -700,6 +700,16 @@ body {
     background: #f8f9fa;
 }
 
+.admin-buttons {
+    display: flex;
+    justify-content: right;
+}
+.admin-buttons a {
+    margin: 10px 0 0 10px;
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
 .header__admin-link .download-btn {
     margin-right: 10px;
     padding: 8px 10px;

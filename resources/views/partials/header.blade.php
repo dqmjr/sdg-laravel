@@ -46,24 +46,6 @@
 
                 <!-- Админ / авторизация -->
                 <div class="header__admin-link">
-                    @guest
-                    @else
-                        <a href="{{ route('admin.goals.index') }}" class="download-btn">
-                            {!! __('messages.admin_panel') !!}
-                        </a>
-
-                        <a class="download-btn" href="{{ route('logout') }}"
-                           onclick="event.preventDefault();
-                                    if(confirm('Вы действительно хотите выйти?')) {
-                                        document.getElementById('logout-form').submit();
-                                    }">
-                            {!! __('messages.logout') !!}
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    @endguest
-
                     <!-- Переключатель языков -->
                     <div class="header__language">
                         <div class="language-switcher">
@@ -97,7 +79,27 @@
                 </div>
             </nav>
         </div>
+        @guest
+        @else
+            <div class="admin-buttons"">
+                <a href="{{ route('admin.goals.index') }}" class="download-btn">
+                    {!! __('messages.admin_panel') !!}
+                </a>
+
+                <a class="download-btn" href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                                    if(confirm('Вы действительно хотите выйти?')) {
+                                        document.getElementById('logout-form').submit();
+                                    }">
+                    {!! __('messages.logout') !!}
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </div>
+        @endguest
     </div>
+
 
     <script>
         const burger = document.getElementById('burger');
