@@ -71,7 +71,7 @@
 
             <div class="mb-3">
                 <label class="form-label">Ссылка (KK)</label>
-                <input type="url" name="url_en" value="{{ $indicator->url_en }}" class="form-control">
+                <input type="url" name="url_kk" value="{{ $indicator->url_kk }}" class="form-control">
             </div>
 
             <div class="mb-3">

@@ -211,7 +211,7 @@
                     'status' => $indicator->status,
                     'value'  => $indicator->value,
                     'unit'   => $indicator->$indicatorUnitField ?? $indicator->unit,
-                    'url'    => $indicator->$indicatorUrlField ?? $indicator->url,
+                    'url'    => $indicator->locolizedUrl,
                 ];
             })->toArray(),
         ];
