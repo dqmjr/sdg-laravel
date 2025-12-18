@@ -17,6 +17,9 @@
                 <th>Название RU</th>
                 <th>Название KZ</th>
                 <th>Название EN</th>
+                <th>Ссылка RU</th>
+                <th>Ссылка KK</th>
+                <th>Ссылка EN</th>
                 <th>Цвет</th>
                 <th class="text-end">Действия</th>
             </tr>
@@ -29,6 +32,9 @@
                     <td>{{ $goal->title }}</td>
                     <td>{{ $goal->title_kk }}</td>
                     <td>{{ $goal->title_en }}</td>
+                    <td>{{ $goal->url }}</td>
+                    <td>{{ $goal->url_kk }}</td>
+                    <td>{{ $goal->url_en }}</td>
                     <td>
                         <div style="width:30px; height:20px; background: {{ $goal->color ?? '#ccc' }}"></div>
                     </td>

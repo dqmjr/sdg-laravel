@@ -14,6 +14,9 @@ class SdgGoal extends Model
         'title',
         'title_kk',
         'title_en',
+        'url',
+        'url_kk',
+        'url_en',
         'color',
     ];
 
@@ -41,9 +44,9 @@ class SdgGoal extends Model
     {
         $locale = app()->getLocale();
         $field = match ($locale) {
-            'kk' => 'unit_kk',
-            'en' => 'unit_en',
-            default => 'unit',
+            'kk' => 'title_kk',
+            'en' => 'title_en',
+            default => 'title',
         };
 
         return $this->$field ?? $this->title;

@@ -29,6 +29,21 @@
             </div>
 
             <div class="mb-3">
+                <label class="form-label">Ссылка (RU)</label>
+                <input type="text" name="url" value="{{ $goal->url }}" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Ссылка (KK)</label>
+                <input type="text" name="url_kk" value="{{ $goal->url_kk }}" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Ссылка (EN)</label>
+                <input type="text" name="url_en" value="{{ $goal->url_en }}" class="form-control">
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label">Цвет</label>
                 <input type="color" name="color" value="{{ $goal->color }}" class="form-control">
             </div>

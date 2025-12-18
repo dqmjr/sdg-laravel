@@ -25,7 +25,10 @@ class SdgGoalController extends Controller
             'title'    => 'required|string|max:255',
             'title_kk' => 'nullable|string|max:255',
             'title_en' => 'nullable|string|max:255',
-            'color'    => 'nullable|string|max:7', // цвет
+            'url'      => 'required|string|max:255',
+            'url_kk'   => 'nullable|string|max:255',
+            'url_en'   => 'nullable|string|max:255',
+            'color'    => 'nullable|string|max:255',
         ]);
 
         SdgGoal::create($request->all());
@@ -46,7 +49,10 @@ class SdgGoalController extends Controller
             'title'    => 'required|string|max:255',
             'title_kk' => 'nullable|string|max:255',
             'title_en' => 'nullable|string|max:255',
-            'color'    => 'nullable|string|max:7',
+            'url'      => 'required|string|max:255',
+            'url_kk'   => 'nullable|string|max:255',
+            'url_en'   => 'nullable|string|max:255',
+            'color'    => 'nullable|string|max:255',
         ]);
 
         $goal->update($request->all());
