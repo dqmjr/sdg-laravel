@@ -51,9 +51,8 @@ body {
 
 .header__main-menu a {
     font-weight: 500;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 134%;
-    text-transform: uppercase;
     text-align: center;
     color: #066f9f;
     text-decoration: none;
@@ -488,7 +487,7 @@ body {
     transform: translateY(0);
 }
 
-.language-switcher .language-dropdown .language-option {
+.language-switcher .language-dropdown a {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -509,7 +508,7 @@ body {
     padding: 8px 16px;
 }
 
-.language-switcher .language-dropdown .language-option:hover {
+.language-switcher .language-dropdown a:hover {
     background: #f8f9fa;
 }
 
@@ -520,19 +519,19 @@ body {
     text-transform: uppercase;
 }
 
-.language-switcher .language-dropdown .language-option.active {
+.language-switcher .language-dropdown a.active {
     background: #d74e5b;
     color: #fff;
 }
 
-.language-switcher .language-dropdown .language-option .flag-icon {
+.language-switcher .language-dropdown a .flag-icon {
     width: 20px;
     height: 15px;
     border-radius: 2px;
     object-fit: cover;
 }
 
-.language-switcher .language-dropdown .language-option .language-name {
+.language-switcher .language-dropdown a .language-name {
     font-weight: 500;
 }
 

@@ -49,3 +49,4 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(
 });
 
 Route::redirect('/home', '/', 301);
+Route::redirect('/kk', '/', 301);
