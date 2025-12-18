@@ -24,7 +24,7 @@
 
                 <div class="card-block">
                     @foreach($goals as $goal)
-                        <a href="#" class="card-item" style="background: {{ $goal->color }};">
+                        <a href="{{ $goal->localized_url }}" class="card-item" style="background: {{ $goal->color }};">
 
                             <div class="card-item--number">
                                 {{ $goal->code }}
@@ -197,21 +197,17 @@
     $locale = app()->getLocale();
 
     $chartData = $goals->map(function($goal) use ($locale) {
-        $goalTitleField = 'title_' . $locale;
         return [
             'code'  => $goal->code,
-            'title' => $goal->$goalTitleField ?? $goal->title, // берём перевод, если есть
+            'title' => $goal->localizedTitle,
             'color' => $goal->color,
             'data'  => $goal->indicators->map(function($indicator) use ($locale) {
-                $indicatorTitleField = 'title_' . $locale;
-                $indicatorUnitField = 'unit_' . $locale;
-                $indicatorUrlField = 'url_' . $locale;
                 return [
-                    'title'  => $indicator->$indicatorTitleField ?? $indicator->title,
+                    'title'  => $indicator->localizedTitle,
                     'status' => $indicator->status,
                     'value'  => $indicator->value,
-                    'unit'   => $indicator->$indicatorUnitField ?? $indicator->unit,
-                    'url'    => $indicator->locolizedUrl,
+                    'unit'   => $indicator->localizedUnit,
+                    'url'    => $indicator->localizedUrl,
                 ];
             })->toArray(),
         ];

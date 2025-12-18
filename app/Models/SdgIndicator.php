@@ -32,16 +32,39 @@ class SdgIndicator extends Model
         return $this->belongsTo(SdgGoal::class, 'goal_id');
     }
 
-	public function getLocolizedUrlAttribute()
+	public function getLocalizedUrlAttribute()
 	{
-		$locale = app()->getLocale();
+        $locale = app()->getLocale();
+        $field = match ($locale) {
+            'kk' => 'url_kk',
+            'en' => 'url_en',
+            default => 'url',
+        };
 
-		if ($locale == 'kk') {
-			return $this->url_kk;
-		} elseif ($locale == 'ru') {
-			return $this->url;
-		} elseif ($locale == 'en') {
-			return $this->url_en;
-		}
+        return $this->$field ?? $this->url;
+	}
+
+	public function getLocalizedUnitAttribute()
+	{
+        $locale = app()->getLocale();
+        $field = match ($locale) {
+            'kk' => 'unit_kk',
+            'en' => 'unit_en',
+            default => 'unit',
+        };
+
+        return $this->$field ?? $this->unit;
+	}
+
+	public function getLocalizedTitleAttribute()
+	{
+        $locale = app()->getLocale();
+        $field = match ($locale) {
+            'kk' => 'unit_kk',
+            'en' => 'unit_en',
+            default => 'unit',
+        };
+
+        return $this->$field ?? $this->title;
 	}
 }

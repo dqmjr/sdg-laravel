@@ -24,4 +24,28 @@ class SdgGoal extends Model
     {
         return $this->hasMany(SdgIndicator::class, 'goal_id');
     }
+
+    public function getLocalizedUrlAttribute()
+    {
+        $locale = app()->getLocale();
+        $field = match ($locale) {
+            'kk' => 'url_kk',
+            'en' => 'url_en',
+            default => 'url',
+        };
+
+        return $this->$field ?? $this->url;
+    }
+
+    public function getLocalizedTitleAttribute()
+    {
+        $locale = app()->getLocale();
+        $field = match ($locale) {
+            'kk' => 'unit_kk',
+            'en' => 'unit_en',
+            default => 'unit',
+        };
+
+        return $this->$field ?? $this->title;
+    }
 }
